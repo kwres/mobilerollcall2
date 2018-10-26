@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace WebApi
+namespace WebApi1
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API yapılandırması ve hizmetleri
+            // Web API configuration and services
 
-            // Web API yolları
+            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "ControllerAction",
-                routeTemplate: "api/{controller}/{action}"
-                
-            );
-
-            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

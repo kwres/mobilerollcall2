@@ -5,12 +5,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebApi.Models.ViewModels;
+using WebApi1.Models.ViewModels;
 
-namespace WebApi.Controllers
+namespace WebApi1.Controllers
 {
     public class UserController : ApiController
     {
+        [HttpGet]
+        public string Get()
+        {
+            return "return smth";
+        }
 
         [HttpPost]
         public Boolean register(User control)
@@ -29,8 +34,10 @@ namespace WebApi.Controllers
         [HttpPost]
         public List<User> getList(UserGetList formData)
         {
-            return new User().getList(formData.Filter,formData.UserType,formData.State);
+            return new User().getList(formData.Filter, formData.UserType, formData.State);
         }
+
+
 
     }
 }
