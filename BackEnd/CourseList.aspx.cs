@@ -45,11 +45,20 @@ namespace BackEnd
             get
             {
                 CourseTime r = new CourseTime();
+                r.Id = Convert.ToInt32(hdn4.Value);
+                r.StartTime = Convert.ToDateTime(txtStart.Value);
+                r.EndTime = Convert.ToDateTime(txtEnd.Value);
+                r.Duration = Convert.ToInt32(txtDuration);
+               
 
                 return r;
             }
             set
             {
+                hdn4.SetValue(value.Id);
+                txtStart.SetValue(value.StartTime);
+                txtEnd.SetValue(value.EndTime);
+                txtDuration.SetValue(value.Duration);
 
             }
         }
@@ -60,6 +69,9 @@ namespace BackEnd
             get
             {
                 CourseStudent r = new CourseStudent();
+                r.StudentNameSurname = Convert.ToString(txtStudentName.Value);
+                r.StudentNumber = Convert.ToString(txtStudentNumber.Value);
+
                 return r;
             }
             set
@@ -71,7 +83,9 @@ namespace BackEnd
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Store str = grdList.GetStore();
+            str.DataSource = new Course().getList(1, txtFilter.Text);
+            str.DataBind();
         }
 
 
@@ -99,15 +113,15 @@ namespace BackEnd
             }
 
 
-           
 
 
-                /*
-                int Id = Convert.ToInt32(e.ExtraParams["Id"]);
-                string courseName = e.ExtraParams["CN"];
-                X.Msg.Alert("UYARI", e.ExtraParams["command"] + "-" + Id.ToString() + "-" + courseName).Show();  
-                */
-            }
+
+            /*
+            int Id = Convert.ToInt32(e.ExtraParams["Id"]);
+            string courseName = e.ExtraParams["CN"];
+            X.Msg.Alert("UYARI", e.ExtraParams["command"] + "-" + Id.ToString() + "-" + courseName).Show();  
+            */
+        }
 
 
 
@@ -136,7 +150,7 @@ namespace BackEnd
             //{
             //    week(baslangıc, bitis);
             //}
-           
+
 
             wndNew.Show();
         }
@@ -147,17 +161,21 @@ namespace BackEnd
         ////    return 0;
         ////}
 
-       
+
         private void courseTime(int Id)
         {
             Course = new Course() { Id = Id }.get();
-            
+
+            Store str = gridPanelCourseTime.GetStore();
+            str.DataSource = new CourseTime().getCourseTimeList(Id);
             winCourseTime.Show();
         }
 
         private void studentList(int Id)
         {
             Course = new Course() { Id = Id }.get();
+            Store str = grdStudentList.GetStore();
+            str.DataSource = new CourseStudent().getStudentList(Id);
             winStudentList.Show();
         }
 
@@ -274,10 +292,10 @@ namespace BackEnd
         protected void txtEndDate_TextChanged(object sender, EventArgs e)
         {
             Course c = new Course();
-            c.StartDate=Convert.ToDateTime(txtStartDate.Value);
+            c.StartDate = Convert.ToDateTime(txtStartDate.Value);
             c.EndDate = Convert.ToDateTime(txtEndDate.Value);
 
-            
+
 
         }
 
@@ -285,7 +303,7 @@ namespace BackEnd
         {
             var control = CourseStudent;
 
-            if (control.StudentName == "")
+            if (control.StudentNameSurname == "")
             {
                 X.Msg.Alert("UYARI", "Lütfen geçerli bir ad giriniz").Show();
                 return;
@@ -301,6 +319,53 @@ namespace BackEnd
             {
                 X.Msg.Alert("UYARI", "Öğrenci kayıt edilememiştir").Show();
             }
+        }
+
+        protected void txtStartDate_DirectSelect(object sender, DirectEventArgs e)
+        {
+            DateTime startDate = Convert.ToDateTime(txtStartDate.Value);
+            DateTime endDate = Convert.ToDateTime(txtEndDate.Value);
+
+            var diff = endDate.Subtract(startDate).TotalDays;
+            int week =Convert.ToInt32( diff / 7);
+            txtTotalWeeks.SetValue(week);
+
+        }
+        
+
+        protected void timeSelect(object sender, DirectEventArgs e)
+        {
+            DateTime starTime = Convert.ToDateTime(txtStart.Value);
+            DateTime endTime = Convert.ToDateTime(txtEnd.Value);
+
+            var time = endTime.Subtract(starTime).TotalMinutes;
+            txtDuration.SetValue(time);
+
+        }
+        
+        protected void btnKapatCourseTime_DirectClick(object sender, DirectEventArgs e)
+        {
+            winCourseTime.Hide();
+        }
+
+        protected void btnKapatStudentList_DirectClick(object sender, DirectEventArgs e)
+        {
+            winStudentList.Hide();
+        }
+
+        protected void btnKapatRollBack_DirectClick(object sender, DirectEventArgs e)
+        {
+            winRollBack.Hide();
+        }
+
+        protected void btnWinCourseTimeUpdate_DirectClick(object sender, DirectEventArgs e)
+        {
+            winCourseTimeUpdate.Hide();
+        }
+
+        protected void btnKapatOgrEkle_DirectClick(object sender, DirectEventArgs e)
+        {
+            winAddStudent.Hide();
         }
     }
 }

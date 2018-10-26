@@ -93,17 +93,9 @@
             <ext:TextField runat="server" ID="txtCourseName" FieldLabel="Ders Adı" Padding="3" LabelWidth="150" Width="450"></ext:TextField>
             <ext:NumberField runat="server" ID="txtTheorical" FieldLabel="Teorik Ders Saati" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:NumberField>
             <ext:NumberField runat="server" ID="txtPractical" FieldLabel="Pratik Ders Saati" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:NumberField>
-            <ext:DateField runat="server" ID="txtStartDate"  FieldLabel="Başlangıç Tarihi" Padding="3" LabelWidth="150" Width="300" ></ext:DateField>
-            <ext:DateField runat="server" ID="txtEndDate"  FieldLabel="Bitiş Tarihi" Padding="3" LabelWidth="150" Width="300" OnTextChanged="txtEndDate_TextChanged"><Listeners><Change Fn ="Week"/></Listeners></ext:DateField>
-            <script>
-                var Week = function () {
-                    var baslangıc = txtStartDate;
-                    var bitis = txtEndDate;
-
-                    var week = bitis - baslangıc / 7;
-                    txtTotalWeeks.Text = week;
-                }
-            </script>
+            <ext:DateField runat="server" ID="txtStartDate"  FieldLabel="Başlangıç Tarihi" Padding="3" LabelWidth="150" Width="300"  OnDirectSelect="txtStartDate_DirectSelect"></ext:DateField>
+            <ext:DateField runat="server" ID="txtEndDate"  FieldLabel="Bitiş Tarihi" Padding="3" LabelWidth="150" Width="300" OnDirectChange="txtStartDate_DirectSelect"></ext:DateField>
+            
             <ext:NumberField runat="server" ID="txtTotalWeeks" FieldLabel="Toplam Hafta" Disabled="true" Padding="3" LabelWidth="150"></ext:NumberField>
         </Items>
         
@@ -126,7 +118,7 @@
 
         <ext:Window runat="server" ID="winCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="800">
             <Items>
-                 <ext:GridPanel runat="server" ID="gridPanelCourseTime" Flex="1">
+           <ext:GridPanel runat="server" ID="gridPanelCourseTime" Flex="1">
           <Store>
             <ext:Store runat="server">
                 <Fields>
@@ -180,7 +172,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button3" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnKapatCourseTime" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatCourseTime_DirectClick" ></ext:Button>
         </Buttons>
         </ext:Window>
 
@@ -232,7 +224,7 @@
             <ext:Hidden runat="server" ID="hdnStudentTime"></ext:Hidden>           
         </Items>
           <Items>
-        <ext:GridPanel runat="server" ID="GridPanel1" Flex="1">
+        <ext:GridPanel runat="server" ID="grdStudentList" Flex="1">
         <TopBar>
             <ext:Toolbar runat="server">
                 <Items>
@@ -267,7 +259,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button4" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnKapatStudentList" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatStudentList_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
@@ -286,7 +278,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button2" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnKapatOgrEkle" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatOgrEkle_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
@@ -295,7 +287,25 @@
     <ext:Window runat="server" ID="winRollBack" Title="Yoklama Listesi" Modal="true" Hidden="true" Width="460">
         <Items>
             <ext:Hidden runat="server" ID="hdn4"></ext:Hidden>
-           
+            <ext:GridPanel runat="server" ID="gridRollBack" Flex="1">
+          <Store>
+            <ext:Store runat="server">
+                <Fields>
+                    <ext:ModelField Name="Id"></ext:ModelField>
+                    <ext:ModelField Name="StartDate" Type="Date"></ext:ModelField>   
+                    <ext:ModelField Name="CourseName"></ext:ModelField>
+                    <ext:ModelField Name="StartTime"></ext:ModelField>
+                </Fields>
+            </ext:Store>
+        </Store>
+        <ColumnModel>
+            <Columns>
+                <ext:Column runat="server" DataIndex="StartDate" Text="Tarih" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="CourseName" Text="Ders" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="StartTime" Text="Başlangıç Saati" Flex="2"></ext:Column>
+            </Columns>
+        </ColumnModel>
+    </ext:GridPanel>
         </Items>
         <Buttons>
             <ext:Button runat="server" ID="btnSaveRollBack" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSaveRollBack_DirectClick">
@@ -305,7 +315,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button5" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnKapatRollBack" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatRollBack_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
@@ -323,12 +333,9 @@
                         </Items>
                  
                     </ext:ComboBox>
-            <ext:TimeField runat = "server"
-                           MinTime = "9:00"
-                           MaxTime = "18:00"
-                           Increment = "30"
-                           SelectedTime = "10:00"
-                           Format = "hh:mm tt"/>
+           <ext:TimeField runat="server" ID="txtStart" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="10:00"  Format="hh:mm tt" OnDirectSelect="timeSelect"/>
+            <ext:TimeField runat="server" ID="txtEnd" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="10:00"  Format="hh:mm tt" OnDirectSelect="timeSelect"/>
+            <ext:TextField runat="server" ID="txtDuration"></ext:TextField>
         </Items>
         <Buttons>
             <ext:Button runat="server" ID="Button6" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSaveRollBack_DirectClick">
@@ -338,7 +345,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button7" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnWinCourseTimeUpdate" Icon="Delete" Text="Vazgeç" OnDirectClick="btnWinCourseTimeUpdate_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
