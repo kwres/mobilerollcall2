@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebApi.Models.ViewModels
-{
+namespace WebApi1.Models.ViewModels
+{ 
+    
     /// <summary>
-    /// Viewmodel used for listing users over User class getList method
-    /// </summary>
+   /// Viewmodel used for listing users over User class getList method
+   /// </summary>
     public class UserGetList
     {
         public string Filter { get; set; }
@@ -15,4 +16,5 @@ namespace WebApi.Models.ViewModels
         public int State { get; set; }
 
     }
+
 }
