@@ -166,13 +166,31 @@ namespace BackEnd {
         protected global::Ext.Net.GridPanel gridPanelCourseTime;
         
         /// <summary>
-        /// Button1 control.
+        /// hdnCoursetime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button Button1;
+        protected global::Ext.Net.Hidden hdnCoursetime;
+        
+        /// <summary>
+        /// btnCourseList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnCourseList;
+        
+        /// <summary>
+        /// btnCourseTimeSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnCourseTimeSave;
         
         /// <summary>
         /// btnKapatCourseTime control.
@@ -193,13 +211,13 @@ namespace BackEnd {
         protected global::Ext.Net.Window winStudentList;
         
         /// <summary>
-        /// hdnStudentTime control.
+        /// hdnStudent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Hidden hdnStudentTime;
+        protected global::Ext.Net.Hidden hdnStudent;
         
         /// <summary>
         /// grdStudentList control.
@@ -256,13 +274,13 @@ namespace BackEnd {
         protected global::Ext.Net.Window winAddStudent;
         
         /// <summary>
-        /// HhdnStudentAdd control.
+        /// studentID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Hidden HhdnStudentAdd;
+        protected global::Ext.Net.Hidden studentID;
         
         /// <summary>
         /// txtStudentName control.
@@ -310,13 +328,13 @@ namespace BackEnd {
         protected global::Ext.Net.Window winRollBack;
         
         /// <summary>
-        /// hdn4 control.
+        /// rollBackId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Hidden hdn4;
+        protected global::Ext.Net.Hidden rollBackId;
         
         /// <summary>
         /// gridRollBack control.
@@ -355,13 +373,13 @@ namespace BackEnd {
         protected global::Ext.Net.Window winCourseTimeUpdate;
         
         /// <summary>
-        /// Hidden1 control.
+        /// courseTimeUpdateId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Hidden Hidden1;
+        protected global::Ext.Net.Hidden courseTimeUpdateId;
         
         /// <summary>
         /// cbDay control.
