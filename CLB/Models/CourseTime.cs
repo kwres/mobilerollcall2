@@ -1,4 +1,5 @@
 ﻿using CLB.Infrastructure;
+using Dapper;
 using DapperExtensions;
 using MySql.Data.MySqlClient;
 using System;
@@ -50,5 +51,17 @@ namespace CLB.Models
             }
             return this.Id;
         }
+        public List<CourseTime> getCourseTimeList(int courseRef)
+        {
+            List<CourseTime> returnValue = new List<CourseTime>();
+            using (MySqlConnection cn = DAL.getCn())
+            {
+                returnValue = cn.Query<CourseTime>("SELECT * FROM CourseTime WHERE CourseRef = @courseRef", new { @courseRef = courseRef }).ToList();
+            }
+
+            return returnValue;
+        }
+
+
     }
 }

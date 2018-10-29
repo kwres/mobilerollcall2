@@ -73,26 +73,26 @@ namespace CLB.Models
             return returnValue;
         }
 
-        public List<CourseTime> getCourseTimes()
-        {
-            List<CourseTime> returnValue = new List<CourseTime>();
+        //public List<CourseTime> getCourseTimes()
+        //{
+        //    List<CourseTime> returnValue = new List<CourseTime>();
 
-            using (MySqlConnection cn = DAL.getCn())
-            {
-                if (this.Theorical != 0 ||this.Practical!=0)
-                {
-                    returnValue = cn.Query<CourseTime>("select day,StartTime from Course where Id=@Id ", new { }).ToList();
-                }
-                else
-                {
-                    returnValue =null;
-                    return returnValue;
-                }
+        //    using (MySqlConnection cn = DAL.getCn())
+        //    {
+        //        if (this.Theorical != 0 ||this.Practical!=0)
+        //        {
+        //            returnValue = cn.Query<CourseTime>("select day,StartTime from Course where Id=@Id ", new { }).ToList();
+        //        }
+        //        else
+        //        {
+        //            returnValue =null;
+        //            return returnValue;
+        //        }
               
                 
-            }
-            return returnValue;
-        }
+        //    }
+        //    return returnValue;
+        //}
 
         public Course get()
         {
