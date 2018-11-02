@@ -231,7 +231,9 @@
             <ext:Toolbar runat="server">
                 <Items>
                     <ext:Button runat="server" ID="btnStudentAdd" Icon="Add" OnDirectClick="btnStudentAdd_DirectClick"></ext:Button>
-                    <ext:Button runat="server" ID="btnExcel" Icon="Page" OnDirectClick="btnExcel_DirectClick"></ext:Button>                  
+                    <ext:Button runat="server" ID="btnExcel" Icon="Page" OnDirectClick="btnExcel_DirectClick"></ext:Button>   
+                    <ext:Button runat="server" ID="btnList" Icon="Find" OnDirectClick="btnList_DirectClick"></ext:Button>                  
+
                 </Items>
             </ext:Toolbar>
         </TopBar>

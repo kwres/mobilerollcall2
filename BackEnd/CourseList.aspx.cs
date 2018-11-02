@@ -188,9 +188,9 @@ namespace BackEnd
         private void studentList(int Id)
         {
             Course = new Course() { Id = Id }.get();
-            Store str = grdStudentList.GetStore();
-            str.DataSource = new CourseStudent().getStudentList(Convert.ToInt32(hdnStudent.Value));
-            DataBind();
+            //Store str = grdStudentList.GetStore();
+            //str.DataSource = new CourseStudent().getStudentList(Id);
+            //DataBind();
             winStudentList.Show();
         }
 
@@ -390,6 +390,14 @@ namespace BackEnd
             str.DataSource = new CourseTime().getCourseTimeList(Convert.ToInt32(hdnCoursetime.Value));
             DataBind();
 
+        }
+
+        protected void btnList_DirectClick(object sender, DirectEventArgs e)
+        {
+
+            Store str = grdStudentList.GetStore();
+            str.DataSource = new CourseStudent().getStudentList(Convert.ToInt32(hdnStudent.Value));
+            DataBind();
         }
     }
 }
