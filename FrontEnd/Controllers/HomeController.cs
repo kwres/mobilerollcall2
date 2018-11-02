@@ -13,13 +13,15 @@ namespace FrontEnd.Controllers
         {
             return View();
         }
-        public ActionResult Test()
+  public ActionResult Kayit()
         {
             return View();
         }
-        public ActionResult Register()
-        {
-            return View();
-        }
+
     }
+    
 }
+
+
+
+      
