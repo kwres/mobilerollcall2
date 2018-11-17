@@ -75,6 +75,7 @@ namespace BackEnd
                     r.Id = Convert.ToInt32(studentID.Value);
                 }
                 catch{}
+
                 r.StudentNameSurname = Convert.ToString(txtStudentName.Value);
                 r.StudentNumber = Convert.ToString(txtStudentNumber.Value);
                 r.UserRef = 1;
@@ -102,6 +103,7 @@ namespace BackEnd
         {
             string commanName = e.ExtraParams["command"];
             int Id = Convert.ToInt32(e.ExtraParams["Id"]);
+            hdnStudent.SetValue(Id);
             switch (commanName)
             {
                 case "Update":
@@ -109,13 +111,16 @@ namespace BackEnd
                     break;
 
                 case "CourseTimes":
-                    courseTime(Id);
+                    courseTimes(Id);
                     break;
                 case "StudentList":
                     studentList(Id);
                     break;
                 case "RollCallList":
                     rollBack(Id);
+                    break;
+                case "UpdateCourseTime":
+                    updateCourseTime(Id);
                     break;
 
 
@@ -127,21 +132,9 @@ namespace BackEnd
             */
         }
 
-        public void courseTime(object sender, Ext.Net.DirectEventArgs e)
-        {
-            string commanName = e.ExtraParams["command"];
-            int Id = Convert.ToInt32(e.ExtraParams["Id"]);
-            switch (commanName)
-            {
-                case "UpdateCourseTime":
-                    update(Id);
-                    break;
+        
 
-              
-
-            }
-          
-        }
+        
         private void update(int Id)
         {
             Course = new Course() { Id = Id }.get();
@@ -159,28 +152,15 @@ namespace BackEnd
         }
 
 
-        private void courseTime(int Id)
+        private void courseTimes(int Id)
         {
-            Course = new Course() { Id = Id }.get();
-            
+            Course course = new Course() { Id = Id }.get();
+
+            List<CourseTime>  courseTimes = new CourseTime().getCourseTimeList(course);
             Store str = gridPanelCourseTime.GetStore();
-            str.DataSource = new CourseTime().getCourseTimeList(Id);
+            str.DataSource = courseTimes;
+            str.DataBind();
 
-            
-            var practicalNumber = Convert.ToInt32(txtPractical.Value);
-            var teoricalNummber = Convert.ToInt32(txtTheorical.Value);
-
-            for (int i = 0; i < practicalNumber; i++)
-            {
-                Convert.ToString(txtPractical.Value);
-            }
-            for (int i = 0; i < teoricalNummber; i++)
-            {
-                Convert.ToString(txtTheorical.Value);
-
-            }
-
-            DataBind();
             winCourseTime.Show();
            
         }
@@ -188,9 +168,12 @@ namespace BackEnd
         private void studentList(int Id)
         {
             Course = new Course() { Id = Id }.get();
-            //Store str = grdStudentList.GetStore();
+            List<CourseStudent> courseStudents = new CourseStudent().getStudentList(Id);
+            Store str = grdStudentList.GetStore();
             //str.DataSource = new CourseStudent().getStudentList(Id);
-            //DataBind();
+            str.DataSource = courseStudents;
+            str.DataBind();
+
             winStudentList.Show();
         }
 
@@ -200,6 +183,13 @@ namespace BackEnd
             winRollBack.Show();
         }
 
+        public void updateCourseTime(int Id)
+        {
+            CourseTime = new CourseTime { Id = Id }.get();
+            winUpdateCourseTime.Show();
+
+
+        }
 
         protected void btnAddNew_DirectClick(object sender, Ext.Net.DirectEventArgs e)
         {
@@ -384,20 +374,28 @@ namespace BackEnd
             winAddStudent.Hide();
         }
 
-        protected void btnCourseList_DirectClick(object sender, DirectEventArgs e)
-        {
-            Store str = gridPanelCourseTime.GetStore();
-            str.DataSource = new CourseTime().getCourseTimeList(Convert.ToInt32(hdnCoursetime.Value));
-            DataBind();
-
-        }
-
+       
         protected void btnList_DirectClick(object sender, DirectEventArgs e)
         {
 
             Store str = grdStudentList.GetStore();
             str.DataSource = new CourseStudent().getStudentList(Convert.ToInt32(hdnStudent.Value));
             DataBind();
+        }
+
+        protected void btnDelete_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnUpdateSave_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnKapat_DirectClick(object sender, DirectEventArgs e)
+        {
+            winCourseTimeUpdate.Hide();
         }
     }
 }

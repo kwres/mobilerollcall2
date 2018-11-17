@@ -62,22 +62,23 @@
                 <ext:DateColumn runat="server" DataIndex="StartDate" Text="Başlangıç Tarihi" Format="dd/MM/yyyy" Width="120"></ext:DateColumn>
                 <ext:DateColumn runat="server" DataIndex="EndDate" Text="Bitiş Tarihi" Format="dd/MM/yyyy" Width="120"></ext:DateColumn>
                 <ext:CommandColumn runat="server" Width="135">
+                   <Commands>
+                        <ext:GridCommand CommandName="Update" Icon="ApplicationEdit" ToolTip-Text="Güncelle"></ext:GridCommand>
+                        <ext:GridCommand CommandName="CourseTimes" Icon="ClockLink" ToolTip-Text="Ders Saatleri"   > </ext:GridCommand>
+                        <ext:GridCommand CommandName="StudentList" Icon="Vcard" ToolTip-Text="Öğrenci Listesi"></ext:GridCommand>
+                        <ext:GridCommand CommandName="RollCallList" Icon="UserTick" ToolTip-Text="Yoklama Listesi"></ext:GridCommand>
+                    </Commands>
                     <DirectEvents>
                         <Command OnEvent="Command">
                             <EventMask ShowMask="true" Msg="Lütfen bekleyiniz.."></EventMask>
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="Id" Value="record.data.Id"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="CN" Value="record.data.CourseName"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="coursename" Value="record.data.CourseName"></ext:Parameter>
                             </ExtraParams>
                         </Command>
                     </DirectEvents>
-                    <Commands>
-                        <ext:GridCommand CommandName="Update" Icon="ApplicationEdit" ToolTip-Text="Güncelle"></ext:GridCommand>
-                        <ext:GridCommand CommandName="CourseTimes" Icon="ClockLink" ToolTip-Text="Ders Saatleri"   > </ext:GridCommand>
-                        <ext:GridCommand CommandName="StudentList" Icon="Vcard" ToolTip-Text="Öğrenci Listesi"></ext:GridCommand>
-                        <ext:GridCommand CommandName="RollCallList" Icon="UserTick" ToolTip-Text="Yoklama Listesi"></ext:GridCommand>
-                    </Commands>
+                    
                 </ext:CommandColumn>
             </Columns>
         </ColumnModel>
@@ -115,6 +116,7 @@
             <ext:Store runat="server">
                 <Fields>
                     <ext:ModelField Name="Id"></ext:ModelField>
+                    <ext:ModelField Name="CourseTimeDesc"></ext:ModelField>
                     <ext:ModelField Name="CourseName"></ext:ModelField>
                     <ext:ModelField Name="Theorical"></ext:ModelField>
                     <ext:ModelField Name="Practical"></ext:ModelField>
@@ -128,39 +130,37 @@
                 </Fields>
             </ext:Store>
         </Store>
-             <Items>
+        <Items>
             <ext:Hidden runat="server" ID="hdnCoursetime"></ext:Hidden>       
-                 
-            </Items>
-                <TopBar>
-            <ext:Toolbar runat="server">
-                <Items>
-                    <ext:Button runat="server" ID="btnCourseList" Icon="Find" OnDirectClick="btnCourseList_DirectClick"></ext:Button>
-                </Items>
-            </ext:Toolbar>
-        </TopBar>
+        </Items>
         <ColumnModel>
             <Columns>
-                <ext:Column runat="server" DataIndex="CourseTime" Text="DersSaatiAciklamasi" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="Desc" Text="Ders Saati" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="Day" Text="Gün" Flex="2"></ext:Column>
-                <ext:Column runat="server" DataIndex="StartTime" Text="Başlangıç Saati" Flex="2"></ext:Column>
-                <ext:Column runat="server" DataIndex="EndTime" Text="Bitiş Saati" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="CourseTimeDesc" Text="Başlangıç ve Bitiş Saatleri" Flex="2"></ext:Column>
+                <%--<ext:Column runat="server" DataIndex="StartTime" Text="Başlangıç Saati" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="EndTime" Text="Bitiş Saati" Flex="2"></ext:Column>--%>
                 <ext:Column runat="server" DataIndex="Duration" Text="Süre" Flex="1"></ext:Column>
-              <%--  <ext:CommandColumn runat="server" Width="135">
+                <ext:CommandColumn runat="server" Width="135">
+                   <Commands>
+                        <ext:GridCommand CommandName="UpdateCourseTime" Icon="ApplicationEdit" ToolTip-Text="Güncelle"></ext:GridCommand>
+                    </Commands>
                     <DirectEvents>
-                        <Command OnEvent="CourseTime">
+                        <Command OnEvent="Command">
                             <EventMask ShowMask="true" Msg="Lütfen bekleyiniz.."></EventMask>
                             <ExtraParams>
-                                <ext:Parameter Mode="Raw" Name="coursetime" Value="coursetime"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="Id" Value="record.data.Id"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="CN" Value="record.data.CourseName"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="coursename" Value="record.data.CourseName"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="desc" Value="record.data.Desc"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="coursetimedesc" Value="record.data.CourseTimeDesc"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="duration" Value="record.data.Duration"></ext:Parameter>
+
                             </ExtraParams>
                         </Command>
                     </DirectEvents>
-                    <Commands>
-                        <ext:GridCommand CommandName="UpdateCourseTime" Icon="ApplicationEdit" ToolTip-Text="Güncelle"></ext:GridCommand>
-                    </Commands>
-                </ext:CommandColumn>--%>
+                    
+                </ext:CommandColumn>
             </Columns>
         </ColumnModel>
 
@@ -183,16 +183,8 @@
 
 
 
-    <%--<ext:Window runat="server" ID="winCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="460">
-       <Items>
-            <ext:Hidden runat="server" ID="hdnCourseTime"></ext:Hidden>
-            <ext:TextField runat="server" ID="txtTheorical2" FieldLabel="Teorik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-            <ext:TextField runat="server" ID="txtPractical2" FieldLabel="Pratik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-            <ext:TextField runat="server" ID="txtWeek2" FieldLabel="Hafta" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-        </Items>
-          <Items>
-               <ext:GridPanel runat="server" ID="gridPanelCourseTimeUpdate" Flex="1">
-       <Store>
+    <%--<ext:Window runat="server" ID="winupdateCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="460">
+          <Store>
             <ext:Store runat="server">
                 <Fields>
                     <ext:ModelField Name="Id"></ext:ModelField>
@@ -203,6 +195,15 @@
                 </Fields>
             </ext:Store>
         </Store>
+       <Items>
+            <ext:Hidden runat="server" ID="hdnupdateCourseTime"></ext:Hidden>
+            <ext:TextField runat="server" ID="txtTheorical2" FieldLabel="Teorik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
+            <ext:TextField runat="server" ID="txtPractical2" FieldLabel="Pratik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
+            <ext:TextField runat="server" ID="txtWeek2" FieldLabel="Hafta" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
+        </Items>
+          <Items>
+               <ext:GridPanel runat="server" ID="gridPanelCourseTimeUpdate" Flex="1">
+     
        
     </ext:GridPanel>
           </Items>
@@ -218,7 +219,50 @@
         </Buttons>
     </ext:Window>
 --%>
-
+    <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="800">
+        <Items>
+            <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
+       
+        <ext:GridPanel runat="server" Id="grdUpdateCourseTime" Flex="1">
+            <TopBar>
+                <ext:Toolbar runat="server">
+                    <Items>
+                        <ext:Button runat="server" ID="btnDelete" Icon="Delete" OnDirectClick="btnDelete_DirectClick"></ext:Button>
+                    </Items>
+                </ext:Toolbar>
+            </TopBar>
+            <Store>
+            <ext:Store runat="server">
+                <Fields>
+                    <ext:ModelField Name="Id"></ext:ModelField>
+                    <ext:ModelField Name="Desc"></ext:ModelField>
+                    <ext:ModelField Name="CourseTimeDesc"></ext:ModelField>
+                    <ext:ModelField Name="Day"></ext:ModelField>
+                    <ext:ModelField Name="Duration"></ext:ModelField>
+                </Fields>
+            </ext:Store>
+        </Store>
+            <ColumnModel>
+            <Columns>
+                <ext:Column runat="server" DataIndex="Desc" Text="Ders Bilgisi" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="Day" Text="Gün" Flex="1"></ext:Column>
+                <ext:Column runat="server" DataIndex="CourseTimeDesc" Text="Başlangıç ve Bitiş Saati" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="Duration" Text="Süre" Flex="1"></ext:Column>
+            </Columns>
+        </ColumnModel>
+        </ext:GridPanel> 
+        </Items>
+        <Buttons>
+            <ext:Button runat="server" ID="btnUpdateSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnUpdateSave_DirectClick">
+                <DirectEvents>
+                    <Click>
+                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
+                    </Click>
+                </DirectEvents>
+            </ext:Button>
+            <ext:Button runat="server" ID="btnKapat" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapat_DirectClick" ></ext:Button>
+        </Buttons>
+    </ext:Window>
 
 
       <ext:Window runat="server" ID="winStudentList" Title="Öğrenci Listesi" Modal="true" Hidden="true" Width="800">
@@ -231,9 +275,7 @@
             <ext:Toolbar runat="server">
                 <Items>
                     <ext:Button runat="server" ID="btnStudentAdd" Icon="Add" OnDirectClick="btnStudentAdd_DirectClick"></ext:Button>
-                    <ext:Button runat="server" ID="btnExcel" Icon="Page" OnDirectClick="btnExcel_DirectClick"></ext:Button>   
-                    <ext:Button runat="server" ID="btnList" Icon="Find" OnDirectClick="btnList_DirectClick"></ext:Button>                  
-
+                    <ext:Button runat="server" ID="btnExcel" Icon="Page" OnDirectClick="btnExcel_DirectClick"></ext:Button>                  
                 </Items>
             </ext:Toolbar>
         </TopBar>
@@ -270,7 +312,6 @@
 
      <ext:Window runat="server" ID="winAddStudent" Title="Öğrenci Kaydı" Modal="true" Hidden="true" Width="460">
         <Items>
-          
             <ext:Hidden runat="server" ID="studentID"></ext:Hidden>
             <ext:TextField runat="server" ID="txtStudentName" FieldLabel="Öğrenci Adı Soyadı" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
             <ext:TextField runat="server" ID="txtStudentNumber" FieldLabel="Öğrenci Numarası" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>

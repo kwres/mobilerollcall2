@@ -57,7 +57,7 @@ namespace CLB.Models
             List<CourseStudent> returnValue = new List<CourseStudent>();
             using (MySqlConnection cn = DAL.getCn())
             {
-                returnValue = cn.Query<CourseStudent>("SELECT StudentNameSurname,StudentNumber FROM CourseStudent WHERE CourseRef = @courseRef ", new { @courseRef = courseRef }).ToList();
+                returnValue = cn.Query<CourseStudent>("SELECT * FROM CourseStudent WHERE CourseRef = @courseRef ", new { @courseRef = courseRef }).ToList();
             }
             return returnValue;
         }
