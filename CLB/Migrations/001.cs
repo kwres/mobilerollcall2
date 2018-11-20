@@ -51,6 +51,7 @@ namespace CLB.Migrations
 
             Create.Table("CourseTime")
                  .WithColumn("Id").AsInt32().Identity().PrimaryKey()
+                 .WithColumn("CourseTimeNo").AsInt32().NotNullable()
                  .WithColumn("CourseRef").AsInt32().ForeignKey("Course", "Id")
                  .WithColumn("Day").AsInt32()
                  .WithColumn("StartTime").AsDateTime().NotNullable()
