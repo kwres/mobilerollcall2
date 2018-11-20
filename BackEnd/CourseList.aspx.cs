@@ -45,21 +45,22 @@ namespace BackEnd
             get
             {
                 CourseTime r = new CourseTime();
-                r.Id = Convert.ToInt32(hdn4.Value);
+                r.Id = Convert.ToInt32(hdnCoursetime.Value);
                 r.StartTime = Convert.ToDateTime(txtStart.Value);
                 r.EndTime = Convert.ToDateTime(txtEnd.Value);
-                r.Duration = Convert.ToInt32(txtDuration);
+                r.Duration = Convert.ToInt32(txtDuration.Value);
+                r.CourseRef = 1;
+                //r.CourseType = Convert.ToString(txtPractical.Value && txtTheorical.Value);
                
-
                 return r;
             }
             set
             {
-                hdn4.SetValue(value.Id);
+                hdnCoursetime.SetValue(value.Id);
                 txtStart.SetValue(value.StartTime);
                 txtEnd.SetValue(value.EndTime);
                 txtDuration.SetValue(value.Duration);
-
+                
             }
         }
 
@@ -69,13 +70,22 @@ namespace BackEnd
             get
             {
                 CourseStudent r = new CourseStudent();
+                try
+                {
+                    r.Id = Convert.ToInt32(studentID.Value);
+                }
+                catch{}
+
                 r.StudentNameSurname = Convert.ToString(txtStudentName.Value);
                 r.StudentNumber = Convert.ToString(txtStudentNumber.Value);
-
+                r.UserRef = 1;
                 return r;
             }
             set
             {
+                studentID.SetValue(value.Id);
+                txtStudentName.SetValue(value.StudentNameSurname);
+                txtStudentNumber.SetValue(value.StudentNumber);
 
             }
         }
@@ -93,6 +103,7 @@ namespace BackEnd
         {
             string commanName = e.ExtraParams["command"];
             int Id = Convert.ToInt32(e.ExtraParams["Id"]);
+            hdnStudent.SetValue(Id);
             switch (commanName)
             {
                 case "Update":
@@ -100,7 +111,7 @@ namespace BackEnd
                     break;
 
                 case "CourseTimes":
-                    courseTime(Id);
+                    courseTimes(Id);
                     break;
                 case "StudentList":
                     studentList(Id);
@@ -108,14 +119,12 @@ namespace BackEnd
                 case "RollCallList":
                     rollBack(Id);
                     break;
+                case "UpdateCourseTime":
+                    updateCourseTime(Id);
+                    break;
 
 
             }
-
-
-
-
-
             /*
             int Id = Convert.ToInt32(e.ExtraParams["Id"]);
             string courseName = e.ExtraParams["CN"];
@@ -123,22 +132,9 @@ namespace BackEnd
             */
         }
 
+        
 
-
-
-        //public void CommandTime(object sender, Ext.Net.DirectEventArgs e)
-        //{
-        //    string commanName = e.ExtraParams["commandCourse"];
-        //    int Id = Convert.ToInt32(e.ExtraParams["Id"]);
-        //    switch (commanName)
-        //    {
-        //        case "UpdateCourse":
-        //            update(Id);
-        //            break;
-
-        //    }
-        //}
-
+        
         private void update(int Id)
         {
             Course = new Course() { Id = Id }.get();
@@ -155,27 +151,29 @@ namespace BackEnd
             wndNew.Show();
         }
 
-        ////private int week(string baslangıc, string bitis)
-        ////{
 
-        ////    return 0;
-        ////}
-
-
-        private void courseTime(int Id)
+        private void courseTimes(int Id)
         {
-            Course = new Course() { Id = Id }.get();
+            Course course = new Course() { Id = Id }.get();
 
+            List<CourseTime>  courseTimes = new CourseTime().getCourseTimeList(course);
             Store str = gridPanelCourseTime.GetStore();
-            str.DataSource = new CourseTime().getCourseTimeList(Id);
+            str.DataSource = courseTimes;
+            str.DataBind();
+
             winCourseTime.Show();
+           
         }
 
         private void studentList(int Id)
         {
             Course = new Course() { Id = Id }.get();
+            List<CourseStudent> courseStudents = new CourseStudent().getStudentList(Id);
             Store str = grdStudentList.GetStore();
-            str.DataSource = new CourseStudent().getStudentList(Id);
+            //str.DataSource = new CourseStudent().getStudentList(Id);
+            str.DataSource = courseStudents;
+            str.DataBind();
+
             winStudentList.Show();
         }
 
@@ -185,6 +183,13 @@ namespace BackEnd
             winRollBack.Show();
         }
 
+        public void updateCourseTime(int Id)
+        {
+            CourseTime = new CourseTime { Id = Id }.get();
+            winUpdateCourseTime.Show();
+
+
+        }
 
         protected void btnAddNew_DirectClick(object sender, Ext.Net.DirectEventArgs e)
         {
@@ -237,16 +242,6 @@ namespace BackEnd
                 X.Msg.Alert("Uyarı", "Lütfen geçerli bir gün giriniz").Show();
                 return;
             }
-            //int returnValue = deneme.save();
-            //if (returnValue > 0)
-            //{
-            //    X.Msg.Alert("UYARI", "Ders saati eklenmiştir.").Show();
-            //    CourseTime = new CourseTime();
-            //}
-            //else
-            //{
-            //    X.Msg.Alert("UYARI", "Ders saati kayıt edilememiştir").Show();
-            //}
         }
 
         protected void btnSaveCourseTime_DirectClick(object sender, DirectEventArgs e)
@@ -270,7 +265,7 @@ namespace BackEnd
 
         protected void btnStudentAdd_DirectClick(object sender, DirectEventArgs e)
         {
-            CourseStudent = new CourseStudent();
+           
             winAddStudent.Show();
         }
 
@@ -281,7 +276,18 @@ namespace BackEnd
 
         protected void btnSaveStudent_DirectClick(object sender, DirectEventArgs e)
         {
-
+            CourseStudent = new CourseStudent();
+            var kayit = CourseStudent;
+            int kayitReturn = kayit.save();
+            if (kayitReturn == 1)
+            {
+                X.Msg.Alert("UYARI", "Öğrenci Eklenmiştir.").Show();
+                CourseStudent = new CourseStudent();
+            }
+            else
+            {
+                X.Msg.Alert("UYARI", "Öğrenci Eklenememiştir.Tekrar Deneyiniz...").Show();
+            }
         }
 
         protected void txtStartDate_TextChanged(object sender, EventArgs e)
@@ -366,6 +372,30 @@ namespace BackEnd
         protected void btnKapatOgrEkle_DirectClick(object sender, DirectEventArgs e)
         {
             winAddStudent.Hide();
+        }
+
+       
+        protected void btnList_DirectClick(object sender, DirectEventArgs e)
+        {
+
+            Store str = grdStudentList.GetStore();
+            str.DataSource = new CourseStudent().getStudentList(Convert.ToInt32(hdnStudent.Value));
+            DataBind();
+        }
+
+        protected void btnDelete_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnUpdateSave_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnKapat_DirectClick(object sender, DirectEventArgs e)
+        {
+            winCourseTimeUpdate.Hide();
         }
     }
 }

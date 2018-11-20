@@ -226,10 +226,12 @@
     <Content Include="Content\fonts\page-404-style2.html" />
     <Content Include="Content\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="Content\fonts\Stroke-Gap-Icons.svg" />
+    <Content Include="Content\images\Android-vs.-iOS.jpg" />
     <Content Include="Content\images\apple-touch-icon-114x114.png" />
     <Content Include="Content\images\apple-touch-icon-144x144.png" />
     <Content Include="Content\images\apple-touch-icon-72x72.png" />
     <Content Include="Content\images\apple-touch-icon.png" />
+    <Content Include="Content\images\classroom.jpg" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\flat-color-icons-svg\about.svg" />
@@ -570,12 +572,16 @@
     <Content Include="Content\images\flaticon-png\small\lecture.png" />
     <Content Include="Content\images\flaticon-png\small\library.png" />
     <Content Include="Content\images\footer-bg.png" />
+    <Content Include="Content\images\haber-1.jpg" />
+    <Content Include="Content\images\haber_2.jpg" />
+    <Content Include="Content\images\haber_3.jpg" />
     <Content Include="Content\images\logo-white-footer%402x.png" />
     <Content Include="Content\images\logo-white-footer.png" />
     <Content Include="Content\images\logo-wide%402x.png" />
     <Content Include="Content\images\logo-wide-white%402x.png" />
     <Content Include="Content\images\logo-wide-white.png" />
     <Content Include="Content\images\logo-wide.png" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\map-marker.png" />
     <Content Include="Content\images\map-marker2.png" />
     <Content Include="Content\images\map-marker3.png" />
@@ -623,6 +629,7 @@
     <Content Include="Content\images\shadow-overlay.png" />
     <Content Include="Content\images\signature.png" />
     <Content Include="Content\images\title-dots.png" />
+    <Content Include="Content\images\u_class.jpg" />
     <Content Include="Content\includes\appointment.php" />
     <Content Include="Content\includes\booking-form-large.php" />
     <Content Include="Content\includes\booking.php" />
@@ -1037,10 +1044,13 @@
     <Content Include="Content\less\style-main-rtl-extra.less" />
     <Content Include="Content\less\style-main.less" />
     <Content Include="Content\less\utility-classes.less" />
+    <Content Include="libman.json" />
     <None Include="packages.config" />
     <Content Include="Views\shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_viewStart.cshtml" />
+    <Content Include="Views\shared\_Kayitol.cshtml" />
+    <Content Include="Views\Home\Kayit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
