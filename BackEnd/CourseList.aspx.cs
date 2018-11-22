@@ -122,7 +122,9 @@ namespace BackEnd
                 case "UpdateCourseTime":
                     updateCourseTime(Id);
                     break;
-
+                case "DeleteCourseTime":
+                    deleteCourseTime(Id);
+                    break;
 
             }
             /*
@@ -185,12 +187,23 @@ namespace BackEnd
 
         public void updateCourseTime(int Id)
         {
-            CourseTime = new CourseTime { Id = Id }.get();
+            //CourseTime = new CourseTime { Id = Id }.get();
+            Course course = new Course() { Id = Id }.get();
+
+            //List<CourseTime> courseTimesUpdate = new CourseTime().getCourseTimeUpdateList(course);
+            //Store str = grdUpdateCourseTime.GetStore();
+            //str.DataSource = courseTimesUpdate;
+            //str.DataBind();
+
             winUpdateCourseTime.Show();
 
 
         }
 
+        protected void deleteCourseTime(int Id)
+        {
+            windeleteYesNo.Show();
+        }
         protected void btnAddNew_DirectClick(object sender, Ext.Net.DirectEventArgs e)
         {
             Course = new Course();
@@ -394,9 +407,26 @@ namespace BackEnd
 
         }
 
+       
+
         protected void btnKapat_DirectClick(object sender, DirectEventArgs e)
         {
             winCourseTimeUpdate.Hide();
+        }
+
+        protected void btnKapatUpdate_DirectClick(object sender, DirectEventArgs e)
+        {
+            winUpdateCourseTime.Hide();
+        }
+
+        protected void btnDeleteNo_DirectClick(object sender, DirectEventArgs e)
+        {
+            windeleteYesNo.Hide();
+        }
+
+        protected void btnDeleteYes_DirectClick(object sender, DirectEventArgs e)
+        {
+
         }
     }
 }

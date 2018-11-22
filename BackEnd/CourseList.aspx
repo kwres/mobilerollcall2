@@ -144,6 +144,7 @@
                 <ext:CommandColumn runat="server" Width="135">
                    <Commands>
                         <ext:GridCommand CommandName="UpdateCourseTime" Icon="ApplicationEdit" ToolTip-Text="Güncelle"></ext:GridCommand>
+                        <ext:GridCommand CommandName="DeleteCourseTime" Icon="Delete" ToolTip-Text="Sil"></ext:GridCommand>
                     </Commands>
                     <DirectEvents>
                         <Command OnEvent="Command">
@@ -179,58 +180,27 @@
         </ext:Window>
 
 
-
-
-
-
-    <%--<ext:Window runat="server" ID="winupdateCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="460">
-          <Store>
-            <ext:Store runat="server">
-                <Fields>
-                    <ext:ModelField Name="Id"></ext:ModelField>
-                    <ext:ModelField Name="Teorical"></ext:ModelField>
-                    <ext:ModelField Name="Practical"></ext:ModelField>
-                    <ext:ModelField Name="Day"></ext:ModelField>
-                    <ext:ModelField Name="StartTime"></ext:ModelField>
-                </Fields>
-            </ext:Store>
-        </Store>
-       <Items>
-            <ext:Hidden runat="server" ID="hdnupdateCourseTime"></ext:Hidden>
-            <ext:TextField runat="server" ID="txtTheorical2" FieldLabel="Teorik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-            <ext:TextField runat="server" ID="txtPractical2" FieldLabel="Pratik Ders" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-            <ext:TextField runat="server" ID="txtWeek2" FieldLabel="Hafta" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
-        </Items>
-          <Items>
-               <ext:GridPanel runat="server" ID="gridPanelCourseTimeUpdate" Flex="1">
-     
-       
-    </ext:GridPanel>
-          </Items>
-        <Buttons>
-            <ext:Button runat="server" ID="btnSaveCourseTime" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSaveCourseTime_DirectClick">
+        <ext:Window runat="server" ID="windeleteYesNo" Title="Silinsin Mi?" Modal="true" Hidden="true" Width="180">
+            <Items>
+                <ext:Hidden runat="server" ID="hdnDeleteYesNoId"></ext:Hidden>
+            </Items>
+            <Buttons>
+            <ext:Button runat="server" ID="btnDeleteYes" Icon="Accept" Text="Sil" OnDirectClick="btnDeleteYes_DirectClick">
                 <DirectEvents>
                     <Click>
                         <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="Button3" Icon="Delete" Text="Vazgeç" OnDirectClick="btnClose_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnDeleteNo" Icon="Delete" Text="Vazgeç" OnDirectClick="btnDeleteNo_DirectClick" ></ext:Button>
         </Buttons>
-    </ext:Window>
---%>
+        </ext:Window>
+
+
     <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="800">
         <Items>
-            <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
-       
+        <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
         <ext:GridPanel runat="server" Id="grdUpdateCourseTime" Flex="1">
-            <TopBar>
-                <ext:Toolbar runat="server">
-                    <Items>
-                        <ext:Button runat="server" ID="btnDelete" Icon="Delete" OnDirectClick="btnDelete_DirectClick"></ext:Button>
-                    </Items>
-                </ext:Toolbar>
-            </TopBar>
             <Store>
             <ext:Store runat="server">
                 <Fields>
@@ -260,7 +230,7 @@
                     </Click>
                 </DirectEvents>
             </ext:Button>
-            <ext:Button runat="server" ID="btnKapat" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapat_DirectClick" ></ext:Button>
+            <ext:Button runat="server" ID="btnKapat" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatUpdate_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
@@ -394,8 +364,6 @@
             <ext:Button runat="server" ID="btnWinCourseTimeUpdate" Icon="Delete" Text="Vazgeç" OnDirectClick="btnWinCourseTimeUpdate_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
-
-
     </form>
 </body>
 </html>

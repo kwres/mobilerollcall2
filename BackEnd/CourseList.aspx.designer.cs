@@ -193,6 +193,42 @@ namespace BackEnd {
         protected global::Ext.Net.Button btnKapatCourseTime;
         
         /// <summary>
+        /// windeleteYesNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Window windeleteYesNo;
+        
+        /// <summary>
+        /// hdnDeleteYesNoId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden hdnDeleteYesNoId;
+        
+        /// <summary>
+        /// btnDeleteYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnDeleteYes;
+        
+        /// <summary>
+        /// btnDeleteNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnDeleteNo;
+        
+        /// <summary>
         /// winUpdateCourseTime control.
         /// </summary>
         /// <remarks>
@@ -218,15 +254,6 @@ namespace BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.GridPanel grdUpdateCourseTime;
-        
-        /// <summary>
-        /// btnDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnDelete;
         
         /// <summary>
         /// btnUpdateSave control.
