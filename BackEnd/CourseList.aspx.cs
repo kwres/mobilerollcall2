@@ -51,7 +51,7 @@ namespace BackEnd
                 r.Duration = Convert.ToInt32(txtDuration.Value);
                 r.CourseRef = 1;
                 //r.CourseType = Convert.ToString(txtPractical.Value && txtTheorical.Value);
-               
+
                 return r;
             }
             set
@@ -60,7 +60,7 @@ namespace BackEnd
                 txtStart.SetValue(value.StartTime);
                 txtEnd.SetValue(value.EndTime);
                 txtDuration.SetValue(value.Duration);
-                
+
             }
         }
 
@@ -74,7 +74,7 @@ namespace BackEnd
                 {
                     r.Id = Convert.ToInt32(studentID.Value);
                 }
-                catch{}
+                catch { }
 
                 r.StudentNameSurname = Convert.ToString(txtStudentName.Value);
                 r.StudentNumber = Convert.ToString(txtStudentNumber.Value);
@@ -132,9 +132,9 @@ namespace BackEnd
             */
         }
 
-        
 
-        
+
+
         private void update(int Id)
         {
             Course = new Course() { Id = Id }.get();
@@ -156,13 +156,13 @@ namespace BackEnd
         {
             Course course = new Course() { Id = Id }.get();
 
-            List<CourseTime>  courseTimes = new CourseTime().getCourseTimeList(course);
+            List<CourseTime> courseTimes = new CourseTime().getCourseTimeList(course);
             Store str = gridPanelCourseTime.GetStore();
             str.DataSource = courseTimes;
             str.DataBind();
 
             winCourseTime.Show();
-           
+
         }
 
         private void studentList(int Id)
@@ -265,7 +265,7 @@ namespace BackEnd
 
         protected void btnStudentAdd_DirectClick(object sender, DirectEventArgs e)
         {
-           
+
             winAddStudent.Show();
         }
 
@@ -333,11 +333,11 @@ namespace BackEnd
             DateTime endDate = Convert.ToDateTime(txtEndDate.Value);
 
             var diff = endDate.Subtract(startDate).TotalDays;
-            int week =Convert.ToInt32( diff / 7);
+            int week = Convert.ToInt32(diff / 7);
             txtTotalWeeks.SetValue(week);
 
         }
-        
+
 
         protected void timeSelect(object sender, DirectEventArgs e)
         {
@@ -348,7 +348,7 @@ namespace BackEnd
             txtDuration.SetValue(time);
 
         }
-        
+
         protected void btnKapatCourseTime_DirectClick(object sender, DirectEventArgs e)
         {
             winCourseTime.Hide();
@@ -374,7 +374,7 @@ namespace BackEnd
             winAddStudent.Hide();
         }
 
-       
+
         protected void btnList_DirectClick(object sender, DirectEventArgs e)
         {
 
@@ -390,6 +390,7 @@ namespace BackEnd
 
         protected void btnUpdateSave_DirectClick(object sender, DirectEventArgs e)
         {
+            CourseTime courseTime = new CourseTime();
 
         }
 
