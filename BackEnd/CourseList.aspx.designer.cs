@@ -247,13 +247,49 @@ namespace BackEnd {
         protected global::Ext.Net.Hidden hdnUpdateCourseTime;
         
         /// <summary>
-        /// grdUpdateCourseTime control.
+        /// txtCourseNameUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.GridPanel grdUpdateCourseTime;
+        protected global::Ext.Net.TextField txtCourseNameUpdate;
+        
+        /// <summary>
+        /// cbDayUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox cbDayUpdate;
+        
+        /// <summary>
+        /// txtStartTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtStartTime;
+        
+        /// <summary>
+        /// txtEndTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtEndTime;
+        
+        /// <summary>
+        /// txtDurationTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtDurationTime;
         
         /// <summary>
         /// btnUpdateSave control.

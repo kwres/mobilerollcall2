@@ -197,30 +197,23 @@
         </ext:Window>
 
 
-    <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="800">
+    <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="400">
         <Items>
         <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
-        <ext:GridPanel runat="server" Id="grdUpdateCourseTime" Flex="1">
-            <Store>
-            <ext:Store runat="server">
-                <Fields>
-                    <ext:ModelField Name="Id"></ext:ModelField>
-                    <ext:ModelField Name="Desc"></ext:ModelField>
-                    <ext:ModelField Name="CourseTimeDesc"></ext:ModelField>
-                    <ext:ModelField Name="Day"></ext:ModelField>
-                    <ext:ModelField Name="Duration"></ext:ModelField>
-                </Fields>
-            </ext:Store>
-        </Store>
-            <ColumnModel>
-            <Columns>
-                <ext:Column runat="server" DataIndex="Desc" Text="Ders Bilgisi" Flex="2"></ext:Column>
-                <ext:Column runat="server" DataIndex="Day" Text="Gün" Flex="1"></ext:Column>
-                <ext:Column runat="server" DataIndex="CourseTimeDesc" Text="Başlangıç ve Bitiş Saati" Flex="2"></ext:Column>
-                <ext:Column runat="server" DataIndex="Duration" Text="Süre" Flex="1"></ext:Column>
-            </Columns>
-        </ColumnModel>
-        </ext:GridPanel> 
+            <ext:TextField runat="server" ID="txtCourseNameUpdate" DataIndex="CourseTimeDesc" FieldLabel="Ders Bilgisi" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
+             <ext:ComboBox runat="server" ID="cbDayUpdate" FieldLabel="Gün" Editable="false"  Width="300">
+                <Items>
+                    <ext:ListItem Text="Pazartesi" Value="0"></ext:ListItem>
+                    <ext:ListItem Text="Salı" Value="1"></ext:ListItem>
+                    <ext:ListItem Text="Çarşamba" Value="2"></ext:ListItem>
+                    <ext:ListItem Text="Perşembe" Value="3"></ext:ListItem>
+                    <ext:ListItem Text="Cuma" Value="4"></ext:ListItem>
+                </Items>
+               </ext:ComboBox>
+            <ext:TextField runat="server" ID="txtStartTime" DataIndex="StartTime" FieldLabel="Başlangıç Saati" Padding="3" LabelWidth="150" Width="300"  OnDirectSelect="timeSelectTİme"></ext:TextField>
+            <ext:TextField runat="server" ID="txtEndTime" DataIndex="EndTime" FieldLabel="Bitiş Saati" Padding="3" LabelWidth="150" Width="300" OnDirectChange="timeSelectTİme"></ext:TextField>
+            <ext:TextField runat="server" ID="txtDurationTime"  FieldLabel="Süre" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
+
         </Items>
         <Buttons>
             <ext:Button runat="server" ID="btnUpdateSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnUpdateSave_DirectClick">
@@ -348,7 +341,7 @@
                             <ext:ListItem Text="Cuma" Value="4"></ext:ListItem>
                         </Items>
                  
-                    </ext:ComboBox>
+               </ext:ComboBox>
            <ext:TimeField runat="server" ID="txtStart" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="10:00"  Format="hh:mm tt" OnDirectSelect="timeSelect"/>
             <ext:TimeField runat="server" ID="txtEnd" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="10:00"  Format="hh:mm tt" OnDirectSelect="timeSelect"/>
             <ext:TextField runat="server" ID="txtDuration"></ext:TextField>

@@ -428,5 +428,24 @@ namespace BackEnd
         {
 
         }
+
+        protected void datafieldTime1_DirectSelect(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void datafieldTime2_DirectChange(object sender, DirectEventArgs e)
+        {
+
+        }
+        protected void timeSelectTİme(object sender, DirectEventArgs e)
+        {
+            DateTime starTime = Convert.ToDateTime(txtStartTime.Value);
+            DateTime endTime = Convert.ToDateTime(txtEndTime.Value);
+
+            var time = endTime.Subtract(starTime).TotalMinutes;
+            txtDurationTime.SetValue(time);
+
+        }
     }
 }
