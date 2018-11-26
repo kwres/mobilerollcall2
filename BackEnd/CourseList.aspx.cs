@@ -46,12 +46,18 @@ namespace BackEnd
             {
                 CourseTime r = new CourseTime();
                 r.Id = Convert.ToInt32(hdnCoursetime.Value);
-                r.StartTime = Convert.ToDateTime(txtStart.Value);
-                r.EndTime = Convert.ToDateTime(txtEnd.Value);
+                try
+                {
+                    r.StartTime = Convert.ToDateTime(txtStart.Value);
+                }
+                catch { }
+                try
+                {
+                    r.EndTime = Convert.ToDateTime(txtEnd.Value);
+                }
+                catch { }
                 r.Duration = Convert.ToInt32(txtDuration.Value);
-                r.CourseRef = 1;
-                //r.CourseType = Convert.ToString(txtPractical.Value && txtTheorical.Value);
-
+                r.CourseRef = Convert.ToInt32(hdnCourseRef.Value);
                 return r;
             }
             set
@@ -60,7 +66,7 @@ namespace BackEnd
                 txtStart.SetValue(value.StartTime);
                 txtEnd.SetValue(value.EndTime);
                 txtDuration.SetValue(value.Duration);
-
+                hdnCourseRef.SetValue(value.CourseRef);
             }
         }
 
@@ -79,6 +85,7 @@ namespace BackEnd
                 r.StudentNameSurname = Convert.ToString(txtStudentName.Value);
                 r.StudentNumber = Convert.ToString(txtStudentNumber.Value);
                 r.UserRef = 1;
+                r.CourseRef = Convert.ToInt32(hdnCourseRef.Value);
                 return r;
             }
             set
@@ -86,6 +93,7 @@ namespace BackEnd
                 studentID.SetValue(value.Id);
                 txtStudentName.SetValue(value.StudentNameSurname);
                 txtStudentNumber.SetValue(value.StudentNumber);
+               // hdnCourseRef.SetValue(value.CourseRef);
 
             }
         }
@@ -127,11 +135,6 @@ namespace BackEnd
                     break;
 
             }
-            /*
-            int Id = Convert.ToInt32(e.ExtraParams["Id"]);
-            string courseName = e.ExtraParams["CN"];
-            X.Msg.Alert("UYARI", e.ExtraParams["command"] + "-" + Id.ToString() + "-" + courseName).Show();  
-            */
         }
 
 
@@ -140,16 +143,6 @@ namespace BackEnd
         private void update(int Id)
         {
             Course = new Course() { Id = Id }.get();
-            //Course.StartDate = Convert.ToDateTime(txtStartDate.Value);
-            //Course.EndDate = Convert.ToDateTime(txtEndDate.Value);
-            //string baslangıc = Convert.ToString(txtStartDate.Value);
-            //string bitis = Convert.ToString(txtEndDate.Value);
-            //if (baslangıc != "" && bitis!="")
-            //{
-            //    week(baslangıc, bitis);
-            //}
-
-
             wndNew.Show();
         }
 
@@ -158,13 +151,46 @@ namespace BackEnd
         {
             Course course = new Course() { Id = Id }.get();
 
+            var CourseRef = Id;
+
             List<CourseTime> courseTimes = new CourseTime().getCourseTimeList(course);
             Store str = gridPanelCourseTime.GetStore();
             str.DataSource = courseTimes;
             str.DataBind();
-
             winCourseTime.Show();
+        }
 
+        private int courseRefId(int Id)
+        {
+            Course course = new Course() { Id = Id }.get();
+            var CourseRef = Id;
+
+            return CourseRef;
+        }
+
+        protected void btnStudentSave_DirectClick(object sender, DirectEventArgs e)
+        {
+            CourseStudent courseStudent = new CourseStudent();
+           // var courseRef = courseRefId(Course.Id);
+
+            var control = CourseStudent;
+
+            if (control.StudentNameSurname == "")
+            {
+                X.Msg.Alert("UYARI", "Lütfen geçerli bir ad giriniz").Show();
+                return;
+            }
+
+            int returnValue = control.save();
+            if (returnValue > 0)
+            {
+                X.Msg.Alert("UYARI", "Öğrenci eklenmiştir. Yeni bir öğrenci daha ekleyebilirsiniz").Show();
+                CourseStudent = new CourseStudent();
+            }
+            else
+            {
+                X.Msg.Alert("UYARI", "Öğrenci kayıt edilememiştir").Show();
+            }
         }
 
         private void studentList(int Id)
@@ -176,6 +202,7 @@ namespace BackEnd
             str.DataSource = courseStudents;
             str.DataBind();
 
+            hdnCourseRef.SetValue(Id);
             winStudentList.Show();
         }
 
@@ -187,14 +214,8 @@ namespace BackEnd
 
         public void updateCourseTime(int Id)
         {
-            //CourseTime = new CourseTime { Id = Id }.get();
-            Course course = new Course() { Id = Id }.get();
-
-            //List<CourseTime> courseTimesUpdate = new CourseTime().getCourseTimeUpdateList(course);
-            //Store str = grdUpdateCourseTime.GetStore();
-            //str.DataSource = courseTimesUpdate;
-            //str.DataBind();
-
+            //CourseTime course = new CourseTime() { Id = Id }.get();
+            CourseTime = new CourseTime() { Id = Id }.get();
             winUpdateCourseTime.Show();
 
 
@@ -225,7 +246,6 @@ namespace BackEnd
         protected void btnSave_DirectClick(object sender, DirectEventArgs e)
         {
             var control = Course;
-
             if (control.CourseName == "")
             {
                 X.Msg.Alert("UYARI", "Lütfen geçerli bir ders adı giriniz").Show();
@@ -278,7 +298,7 @@ namespace BackEnd
 
         protected void btnStudentAdd_DirectClick(object sender, DirectEventArgs e)
         {
-
+            CourseStudent = new CourseStudent();
             winAddStudent.Show();
         }
 
@@ -287,21 +307,22 @@ namespace BackEnd
 
         }
 
-        protected void btnSaveStudent_DirectClick(object sender, DirectEventArgs e)
-        {
-            CourseStudent = new CourseStudent();
-            var kayit = CourseStudent;
-            int kayitReturn = kayit.save();
-            if (kayitReturn == 1)
-            {
-                X.Msg.Alert("UYARI", "Öğrenci Eklenmiştir.").Show();
-                CourseStudent = new CourseStudent();
-            }
-            else
-            {
-                X.Msg.Alert("UYARI", "Öğrenci Eklenememiştir.Tekrar Deneyiniz...").Show();
-            }
-        }
+        //protected void btnSaveStudent_DirectClick(object sender, DirectEventArgs e)
+        //{
+        //    CourseStudent = new CourseStudent();
+        //    var courseRef = CourseTime.CourseRef;
+        //    var kayit = CourseStudent;
+        //    int kayitReturn = kayit.save();
+        //    if (kayitReturn == 1)
+        //    {
+        //        X.Msg.Alert("UYARI", "Öğrenci Eklenmiştir.").Show();
+        //        CourseStudent = new CourseStudent();
+        //    }
+        //    else
+        //    {
+        //        X.Msg.Alert("UYARI", "Öğrenci Eklenememiştir.Tekrar Deneyiniz...").Show();
+        //    }
+        //}
 
         protected void txtStartDate_TextChanged(object sender, EventArgs e)
         {
@@ -318,28 +339,7 @@ namespace BackEnd
 
         }
 
-        protected void btnStudentSave_DirectClick(object sender, DirectEventArgs e)
-        {
-            var control = CourseStudent;
-
-            if (control.StudentNameSurname == "")
-            {
-                X.Msg.Alert("UYARI", "Lütfen geçerli bir ad giriniz").Show();
-                return;
-            }
-
-            int returnValue = control.save();
-            if (returnValue > 0)
-            {
-                X.Msg.Alert("UYARI", "Öğrenci eklenmiştir. Yeni bir öğrenci daha ekleyebilirsiniz").Show();
-                CourseStudent = new CourseStudent();
-            }
-            else
-            {
-                X.Msg.Alert("UYARI", "Öğrenci kayıt edilememiştir").Show();
-            }
-        }
-
+        
         protected void txtStartDate_DirectSelect(object sender, DirectEventArgs e)
         {
             DateTime startDate = Convert.ToDateTime(txtStartDate.Value);

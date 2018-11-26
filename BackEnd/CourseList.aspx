@@ -92,7 +92,6 @@
             <ext:NumberField runat="server" ID="txtPractical" FieldLabel="Pratik Ders Saati" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:NumberField>
             <ext:DateField runat="server" ID="txtStartDate"  FieldLabel="Başlangıç Tarihi" Padding="3" LabelWidth="150" Width="300"  OnDirectSelect="txtStartDate_DirectSelect"></ext:DateField>
             <ext:DateField runat="server" ID="txtEndDate"  FieldLabel="Bitiş Tarihi" Padding="3" LabelWidth="150" Width="300" OnDirectChange="txtStartDate_DirectSelect"></ext:DateField>
-            
             <ext:NumberField runat="server" ID="txtTotalWeeks" FieldLabel="Toplam Hafta" Disabled="true" Padding="3" LabelWidth="150"></ext:NumberField>
         </Items>
         
@@ -131,15 +130,14 @@
             </ext:Store>
         </Store>
         <Items>
-            <ext:Hidden runat="server" ID="hdnCoursetime"></ext:Hidden>       
+            <ext:Hidden runat="server" ID="hdnCoursetime"></ext:Hidden>     
+
         </Items>
         <ColumnModel>
             <Columns>
                 <ext:Column runat="server" DataIndex="Desc" Text="Ders Saati" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="Day" Text="Gün" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="CourseTimeDesc" Text="Başlangıç ve Bitiş Saatleri" Flex="2"></ext:Column>
-                <%--<ext:Column runat="server" DataIndex="StartTime" Text="Başlangıç Saati" Flex="2"></ext:Column>
-                <ext:Column runat="server" DataIndex="EndTime" Text="Bitiş Saati" Flex="2"></ext:Column>--%>
                 <ext:Column runat="server" DataIndex="Duration" Text="Süre" Flex="1"></ext:Column>
                 <ext:CommandColumn runat="server" Width="135">
                    <Commands>
@@ -160,7 +158,6 @@
                             </ExtraParams>
                         </Command>
                     </DirectEvents>
-                    
                 </ext:CommandColumn>
             </Columns>
         </ColumnModel>
@@ -200,7 +197,7 @@
     <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="400">
         <Items>
         <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
-            <ext:TextField runat="server" ID="txtCourseNameUpdate" DataIndex="CourseTimeDesc" FieldLabel="Ders Bilgisi" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
+            <ext:TextField runat="server" ID="txtCourseNameUpdate" DataIndex="Desc" FieldLabel="Ders Bilgisi" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
              <ext:ComboBox runat="server" ID="cbDayUpdate" FieldLabel="Gün" Editable="false"  Width="300">
                 <Items>
                     <ext:ListItem Text="Pazartesi" Value="0"></ext:ListItem>
@@ -230,7 +227,8 @@
 
       <ext:Window runat="server" ID="winStudentList" Title="Öğrenci Listesi" Modal="true" Hidden="true" Width="800">
         <Items>
-            <ext:Hidden runat="server" ID="hdnStudent"></ext:Hidden>           
+            <ext:Hidden runat="server" ID="hdnStudent"></ext:Hidden> 
+
         </Items>
           <Items>
         <ext:GridPanel runat="server" ID="grdStudentList" Flex="1">
@@ -246,6 +244,7 @@
             <ext:Store runat="server">
                 <Fields>
                     <ext:ModelField Name="Id"></ext:ModelField>
+                    <ext:ModelField Name="CourseRef"></ext:ModelField>
                     <ext:ModelField Name="StudentNameSurname"></ext:ModelField>
                     <ext:ModelField Name="StudentNumber"></ext:ModelField>
                 </Fields>
@@ -261,7 +260,7 @@
      </Items>
 
         <Buttons>
-            <ext:Button runat="server" ID="btnSaveStudent" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSaveStudent_DirectClick">
+            <ext:Button runat="server" ID="btnSaveStudent" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnStudentSave_DirectClick">
                 <DirectEvents>
                     <Click>
                         <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
@@ -275,7 +274,8 @@
 
      <ext:Window runat="server" ID="winAddStudent" Title="Öğrenci Kaydı" Modal="true" Hidden="true" Width="460">
         <Items>
-            <ext:Hidden runat="server" ID="studentID"></ext:Hidden>
+            <ext:Hidden runat="server" ID="studentID" DataIndex="Id"></ext:Hidden>
+            <ext:Hidden runat="server" ID="hdnCourseRef" DataIndex="CourseRef"></ext:Hidden>
             <ext:TextField runat="server" ID="txtStudentName" FieldLabel="Öğrenci Adı Soyadı" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
             <ext:TextField runat="server" ID="txtStudentNumber" FieldLabel="Öğrenci Numarası" Padding="3" LabelWidth="150" Width="300" MinValue="0"></ext:TextField>
         </Items>

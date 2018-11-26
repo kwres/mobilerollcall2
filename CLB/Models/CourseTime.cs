@@ -124,6 +124,16 @@ namespace CLB.Models
 
             return r;
         }
-       
+        public CourseTime get()
+        {
+            DapperExtensions.DapperExtensions.SqlDialect = new MySqlDialect();
+            CourseTime returnValue = new CourseTime();
+            using (MySqlConnection cn = DAL.getCn())
+            {
+                returnValue = cn.Get<CourseTime>(this.Id);
+            }
+
+            return returnValue;
+        }
     }
 }

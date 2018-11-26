@@ -391,6 +391,15 @@ namespace BackEnd {
         protected global::Ext.Net.Hidden studentID;
         
         /// <summary>
+        /// hdnCourseRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden hdnCourseRef;
+        
+        /// <summary>
         /// txtStudentName control.
         /// </summary>
         /// <remarks>
