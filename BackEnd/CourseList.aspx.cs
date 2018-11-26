@@ -168,6 +168,15 @@ namespace BackEnd
             return CourseRef;
         }
 
+
+
+
+
+
+
+
+
+        //öğrenci ekleme
         protected void btnStudentSave_DirectClick(object sender, DirectEventArgs e)
         {
             CourseStudent courseStudent = new CourseStudent();
@@ -192,11 +201,11 @@ namespace BackEnd
                 X.Msg.Alert("UYARI", "Öğrenci kayıt edilememiştir").Show();
             }
         }
-
+        //öğrenci listeleme
         private void studentList(int Id)
         {
             Course = new Course() { Id = Id }.get();
-            List<CourseStudent> courseStudents = new CourseStudent().getStudentList(Id);
+            List<CourseStudent> courseStudents = new CourseStudent().getStudentList(Course.Id);
             Store str = grdStudentList.GetStore();
             //str.DataSource = new CourseStudent().getStudentList(Id);
             str.DataSource = courseStudents;
@@ -307,22 +316,6 @@ namespace BackEnd
 
         }
 
-        //protected void btnSaveStudent_DirectClick(object sender, DirectEventArgs e)
-        //{
-        //    CourseStudent = new CourseStudent();
-        //    var courseRef = CourseTime.CourseRef;
-        //    var kayit = CourseStudent;
-        //    int kayitReturn = kayit.save();
-        //    if (kayitReturn == 1)
-        //    {
-        //        X.Msg.Alert("UYARI", "Öğrenci Eklenmiştir.").Show();
-        //        CourseStudent = new CourseStudent();
-        //    }
-        //    else
-        //    {
-        //        X.Msg.Alert("UYARI", "Öğrenci Eklenememiştir.Tekrar Deneyiniz...").Show();
-        //    }
-        //}
 
         protected void txtStartDate_TextChanged(object sender, EventArgs e)
         {

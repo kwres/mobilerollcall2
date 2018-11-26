@@ -8,6 +8,8 @@
 <body>
     <ext:ResourceManager runat="server"></ext:ResourceManager>
     <form id="form1" runat="server">
+
+    <%-- Dersleri listeleyen ekran --%>
     <ext:GridPanel runat="server" ID="grdList" Flex="1" Title="Ders Listesi" ForceFit="true">
         <TopBar>
             <ext:Toolbar runat="server">
@@ -24,7 +26,6 @@
                         </ext:Button>
                         </RightButtons>
                     </ext:TextField>
-                    
                 </Items>
             </ext:Toolbar>
         </TopBar>
@@ -78,12 +79,12 @@
                             </ExtraParams>
                         </Command>
                     </DirectEvents>
-                    
                 </ext:CommandColumn>
             </Columns>
         </ColumnModel>
     </ext:GridPanel>
 
+    <%-- Ders Ekleme Ekranı --%>
     <ext:Window runat="server" ID="wndNew" Title="Ders Kartı" Modal="true" Hidden="true" Width="460">
         <Items>
             <ext:Hidden runat="server" ID="hdnID"></ext:Hidden>
@@ -107,14 +108,15 @@
         </Buttons>
     </ext:Window>
 
-
-        <ext:Window runat="server" ID="winCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="800">
+    <%-- Ders Saatleri Değişikliği Ekranı --%>
+    <ext:Window runat="server" ID="winCourseTime" Title="Ders Saatleri" Modal="true" Hidden="true" Width="800">
             <Items>
            <ext:GridPanel runat="server" ID="gridPanelCourseTime" Flex="1">
           <Store>
             <ext:Store runat="server">
                 <Fields>
                     <ext:ModelField Name="Id"></ext:ModelField>
+                    <ext:ModelField Name="Desc"></ext:ModelField>
                     <ext:ModelField Name="CourseTimeDesc"></ext:ModelField>
                     <ext:ModelField Name="CourseName"></ext:ModelField>
                     <ext:ModelField Name="Theorical"></ext:ModelField>
@@ -131,11 +133,10 @@
         </Store>
         <Items>
             <ext:Hidden runat="server" ID="hdnCoursetime"></ext:Hidden>     
-
         </Items>
         <ColumnModel>
             <Columns>
-                <ext:Column runat="server" DataIndex="Desc" Text="Ders Saati" Flex="2"></ext:Column>
+                <ext:Column runat="server" DataIndex="Desc" Text="Ders Bilgisi" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="Day" Text="Gün" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="CourseTimeDesc" Text="Başlangıç ve Bitiş Saatleri" Flex="2"></ext:Column>
                 <ext:Column runat="server" DataIndex="Duration" Text="Süre" Flex="1"></ext:Column>
@@ -150,82 +151,33 @@
                             <ExtraParams>
                                 <ext:Parameter Mode="Raw" Name="command" Value="command"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="Id" Value="record.data.Id"></ext:Parameter>
-                                <ext:Parameter Mode="Raw" Name="coursename" Value="record.data.CourseName"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="desc" Value="record.data.Desc"></ext:Parameter>
+                                <ext:Parameter Mode="Raw" Name="coursename" Value="record.data.CourseName"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="coursetimedesc" Value="record.data.CourseTimeDesc"></ext:Parameter>
                                 <ext:Parameter Mode="Raw" Name="duration" Value="record.data.Duration"></ext:Parameter>
-
                             </ExtraParams>
                         </Command>
                     </DirectEvents>
                 </ext:CommandColumn>
             </Columns>
         </ColumnModel>
-
     </ext:GridPanel>
-            </Items>
-            <Buttons>
-            <ext:Button runat="server" ID="btnCourseTimeSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSave_DirectClick">
-                <DirectEvents>
-                    <Click>
-                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
-                    </Click>
-                </DirectEvents>
-            </ext:Button>
-            <ext:Button runat="server" ID="btnKapatCourseTime" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatCourseTime_DirectClick" ></ext:Button>
-        </Buttons>
-        </ext:Window>
-
-
-        <ext:Window runat="server" ID="windeleteYesNo" Title="Silinsin Mi?" Modal="true" Hidden="true" Width="180">
-            <Items>
-                <ext:Hidden runat="server" ID="hdnDeleteYesNoId"></ext:Hidden>
-            </Items>
-            <Buttons>
-            <ext:Button runat="server" ID="btnDeleteYes" Icon="Accept" Text="Sil" OnDirectClick="btnDeleteYes_DirectClick">
-                <DirectEvents>
-                    <Click>
-                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
-                    </Click>
-                </DirectEvents>
-            </ext:Button>
-            <ext:Button runat="server" ID="btnDeleteNo" Icon="Delete" Text="Vazgeç" OnDirectClick="btnDeleteNo_DirectClick" ></ext:Button>
-        </Buttons>
-        </ext:Window>
-
-
-    <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="400">
-        <Items>
-        <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
-            <ext:TextField runat="server" ID="txtCourseNameUpdate" DataIndex="Desc" FieldLabel="Ders Bilgisi" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
-             <ext:ComboBox runat="server" ID="cbDayUpdate" FieldLabel="Gün" Editable="false"  Width="300">
-                <Items>
-                    <ext:ListItem Text="Pazartesi" Value="0"></ext:ListItem>
-                    <ext:ListItem Text="Salı" Value="1"></ext:ListItem>
-                    <ext:ListItem Text="Çarşamba" Value="2"></ext:ListItem>
-                    <ext:ListItem Text="Perşembe" Value="3"></ext:ListItem>
-                    <ext:ListItem Text="Cuma" Value="4"></ext:ListItem>
-                </Items>
-               </ext:ComboBox>
-            <ext:TextField runat="server" ID="txtStartTime" DataIndex="StartTime" FieldLabel="Başlangıç Saati" Padding="3" LabelWidth="150" Width="300"  OnDirectSelect="timeSelectTİme"></ext:TextField>
-            <ext:TextField runat="server" ID="txtEndTime" DataIndex="EndTime" FieldLabel="Bitiş Saati" Padding="3" LabelWidth="150" Width="300" OnDirectChange="timeSelectTİme"></ext:TextField>
-            <ext:TextField runat="server" ID="txtDurationTime"  FieldLabel="Süre" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
-
-        </Items>
+    </Items>
         <Buttons>
-            <ext:Button runat="server" ID="btnUpdateSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnUpdateSave_DirectClick">
-                <DirectEvents>
-                    <Click>
-                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
-                    </Click>
-                </DirectEvents>
-            </ext:Button>
-            <ext:Button runat="server" ID="btnKapat" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatUpdate_DirectClick" ></ext:Button>
+         <ext:Button runat="server" ID="btnCourseTimeSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnSave_DirectClick">
+            <DirectEvents>
+                <Click>
+                    <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
+                </Click>
+            </DirectEvents>
+        </ext:Button>
+        <ext:Button runat="server" ID="btnKapatCourseTime" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatCourseTime_DirectClick" ></ext:Button>
         </Buttons>
     </ext:Window>
 
 
-      <ext:Window runat="server" ID="winStudentList" Title="Öğrenci Listesi" Modal="true" Hidden="true" Width="800">
+    <%-- Öğrenci Listeleme --%>
+    <ext:Window runat="server" ID="winStudentList" Title="Öğrenci Listesi" Modal="true" Hidden="true" Width="800">
         <Items>
             <ext:Hidden runat="server" ID="hdnStudent"></ext:Hidden> 
 
@@ -271,8 +223,9 @@
         </Buttons>
     </ext:Window>
 
-
-     <ext:Window runat="server" ID="winAddStudent" Title="Öğrenci Kaydı" Modal="true" Hidden="true" Width="460">
+    
+    <%-- Öğrenci Ekleme Ekranı --%>
+    <ext:Window runat="server" ID="winAddStudent" Title="Öğrenci Kaydı" Modal="true" Hidden="true" Width="460">
         <Items>
             <ext:Hidden runat="server" ID="studentID" DataIndex="Id"></ext:Hidden>
             <ext:Hidden runat="server" ID="hdnCourseRef" DataIndex="CourseRef"></ext:Hidden>
@@ -291,8 +244,56 @@
         </Buttons>
     </ext:Window>
 
+    <%-- Silinsin mi? --%>
+    <ext:Window runat="server" ID="windeleteYesNo" Title="Silinsin Mi?" Modal="true" Hidden="true" Width="180">
+            <Items>
+                <ext:Hidden runat="server" ID="hdnDeleteYesNoId"></ext:Hidden>
+            </Items>
+            <Buttons>
+            <ext:Button runat="server" ID="btnDeleteYes" Icon="Accept" Text="Sil" OnDirectClick="btnDeleteYes_DirectClick">
+                <DirectEvents>
+                    <Click>
+                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
+                    </Click>
+                </DirectEvents>
+            </ext:Button>
+            <ext:Button runat="server" ID="btnDeleteNo" Icon="Delete" Text="Vazgeç" OnDirectClick="btnDeleteNo_DirectClick" ></ext:Button>
+        </Buttons>
+        </ext:Window>
+
+    <%-- Ders Saatleri Değşiklik Güncelleme Ekranı --%>
+    <ext:Window runat="server" ID="winUpdateCourseTime" Title="Ders Bilgisi Değişikliği" Modal="true" Hidden="true" Width="400">
+        <Items>
+        <ext:Hidden runat="server" ID="hdnUpdateCourseTime"></ext:Hidden>
+            <ext:TextField runat="server" ID="txtCourseNameUpdate" DataIndex="Desc" FieldLabel="Ders Bilgisi" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
+             <ext:ComboBox runat="server" ID="cbDayUpdate" FieldLabel="Gün" Editable="false"  Width="300">
+                <Items>
+                    <ext:ListItem Text="Pazartesi" Value="0"></ext:ListItem>
+                    <ext:ListItem Text="Salı" Value="1"></ext:ListItem>
+                    <ext:ListItem Text="Çarşamba" Value="2"></ext:ListItem>
+                    <ext:ListItem Text="Perşembe" Value="3"></ext:ListItem>
+                    <ext:ListItem Text="Cuma" Value="4"></ext:ListItem>
+                </Items>
+               </ext:ComboBox>
+            <ext:TextField runat="server" ID="txtStartTime" DataIndex="StartTime" FieldLabel="Başlangıç Saati" Padding="3" LabelWidth="150" Width="300"  OnDirectSelect="timeSelectTİme"></ext:TextField>
+            <ext:TextField runat="server" ID="txtEndTime" DataIndex="EndTime" FieldLabel="Bitiş Saati" Padding="3" LabelWidth="150" Width="300" OnDirectChange="timeSelectTİme"></ext:TextField>
+            <ext:TextField runat="server" ID="txtDurationTime"  FieldLabel="Süre" Padding="3" LabelWidth="150" Width="300"></ext:TextField>
+
+        </Items>
+        <Buttons>
+            <ext:Button runat="server" ID="btnUpdateSave" Icon="DatabaseSave" Text="Kaydet" OnDirectClick="btnUpdateSave_DirectClick">
+                <DirectEvents>
+                    <Click>
+                        <EventMask ShowMask="true" Msg="Lütfen bekleyiniz..."></EventMask>
+                    </Click>
+                </DirectEvents>
+            </ext:Button>
+            <ext:Button runat="server" ID="btnKapat" Icon="Delete" Text="Vazgeç" OnDirectClick="btnKapatUpdate_DirectClick" ></ext:Button>
+        </Buttons>
+    </ext:Window>
 
 
+    <%-- Yoklama Ekranı --%>
     <ext:Window runat="server" ID="winRollBack" Title="Yoklama Listesi" Modal="true" Hidden="true" Width="460">
         <Items>
             <ext:Hidden runat="server" ID="rollBackId"></ext:Hidden>
@@ -328,8 +329,8 @@
         </Buttons>
     </ext:Window>
 
-
-   <ext:Window runat="server" ID="winCourseTimeUpdate" Title="Öğrenci Kaydı" Modal="true" Hidden="true" Width="460">
+  
+   <ext:Window runat="server" ID="winCourseTimeUpdate" Title="Ders KAydı" Modal="true" Hidden="true" Width="460">
         <Items>
             <ext:Hidden runat="server" ID="courseTimeUpdateId"></ext:Hidden>
               <ext:ComboBox runat="server" ID="cbDay" FieldLabel="Gün" Editable="false">

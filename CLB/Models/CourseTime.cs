@@ -41,7 +41,10 @@ namespace CLB.Models
         public string Desc {
             get {
                 string r = "";
-                r = String.Format("No : {0} - {1}", CourseTimeNo, CourseType == CourseType.Practical ? "Pratik" : "Teorik");
+                if(r=="")
+                {
+                    r = String.Format("No : {0} - {1}", CourseTimeNo, CourseType == CourseType.Practical ? "Pratik" : "Teorik");
+                }
                 return r;
 
             }
