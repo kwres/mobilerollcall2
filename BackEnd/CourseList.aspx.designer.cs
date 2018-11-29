@@ -157,6 +157,15 @@ namespace BackEnd {
         protected global::Ext.Net.Window winCourseTime;
         
         /// <summary>
+        /// hdnUpdateCourseTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden hdnUpdateCourseTime;
+        
+        /// <summary>
         /// gridPanelCourseTime control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,96 @@ namespace BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.GridPanel gridPanelCourseTime;
+        
+        /// <summary>
+        /// windeleteYesNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Window windeleteYesNo;
+        
+        /// <summary>
+        /// hdnDeleteYesNoId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden hdnDeleteYesNoId;
+        
+        /// <summary>
+        /// btnDeleteYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnDeleteYes;
+        
+        /// <summary>
+        /// btnDeleteNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnDeleteNo;
+        
+        /// <summary>
+        /// winSilindi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Window winSilindi;
+        
+        /// <summary>
+        /// hdnSilindi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden hdnSilindi;
+        
+        /// <summary>
+        /// btnSilindiKapat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnSilindiKapat;
+        
+        /// <summary>
+        /// winUpdateCourseTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Window winUpdateCourseTime;
+        
+        /// <summary>
+        /// cbType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox cbType;
+        
+        /// <summary>
+        /// cbDayUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox cbDayUpdate;
         
         /// <summary>
         /// hdnCoursetime control.
@@ -175,22 +274,94 @@ namespace BackEnd {
         protected global::Ext.Net.Hidden hdnCoursetime;
         
         /// <summary>
-        /// btnCourseTimeSave control.
+        /// txtStartTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btnCourseTimeSave;
+        protected global::Ext.Net.TimeField txtStartTime;
         
         /// <summary>
-        /// btnKapatCourseTime control.
+        /// txtEndTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btnKapatCourseTime;
+        protected global::Ext.Net.TimeField txtEndTime;
+        
+        /// <summary>
+        /// txtDurationTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtDurationTime;
+        
+        /// <summary>
+        /// btnUpdateSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnUpdateSave;
+        
+        /// <summary>
+        /// btnKapat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnKapat;
+        
+        /// <summary>
+        /// winRollBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Window winRollBack;
+        
+        /// <summary>
+        /// rollBackId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden rollBackId;
+        
+        /// <summary>
+        /// gridRollBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.GridPanel gridRollBack;
+        
+        /// <summary>
+        /// btnSaveRollBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnSaveRollBack;
+        
+        /// <summary>
+        /// btnKapatRollBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnKapatRollBack;
         
         /// <summary>
         /// winStudentList control.
@@ -319,168 +490,6 @@ namespace BackEnd {
         protected global::Ext.Net.Button btnKapatOgrEkle;
         
         /// <summary>
-        /// windeleteYesNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Window windeleteYesNo;
-        
-        /// <summary>
-        /// hdnDeleteYesNoId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Hidden hdnDeleteYesNoId;
-        
-        /// <summary>
-        /// btnDeleteYes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnDeleteYes;
-        
-        /// <summary>
-        /// btnDeleteNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnDeleteNo;
-        
-        /// <summary>
-        /// winUpdateCourseTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Window winUpdateCourseTime;
-        
-        /// <summary>
-        /// hdnUpdateCourseTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Hidden hdnUpdateCourseTime;
-        
-        /// <summary>
-        /// txtCourseNameUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.TextField txtCourseNameUpdate;
-        
-        /// <summary>
-        /// cbDayUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.ComboBox cbDayUpdate;
-        
-        /// <summary>
-        /// txtStartTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.TextField txtStartTime;
-        
-        /// <summary>
-        /// txtEndTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.TextField txtEndTime;
-        
-        /// <summary>
-        /// txtDurationTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.TextField txtDurationTime;
-        
-        /// <summary>
-        /// btnUpdateSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnUpdateSave;
-        
-        /// <summary>
-        /// btnKapat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnKapat;
-        
-        /// <summary>
-        /// winRollBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Window winRollBack;
-        
-        /// <summary>
-        /// rollBackId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Hidden rollBackId;
-        
-        /// <summary>
-        /// gridRollBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.GridPanel gridRollBack;
-        
-        /// <summary>
-        /// btnSaveRollBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnSaveRollBack;
-        
-        /// <summary>
-        /// btnKapatRollBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnKapatRollBack;
-        
-        /// <summary>
         /// winCourseTimeUpdate control.
         /// </summary>
         /// <remarks>
@@ -497,6 +506,15 @@ namespace BackEnd {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.Hidden courseTimeUpdateId;
+        
+        /// <summary>
+        /// Desc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden Desc;
         
         /// <summary>
         /// cbDay control.
@@ -535,21 +553,21 @@ namespace BackEnd {
         protected global::Ext.Net.TextField txtDuration;
         
         /// <summary>
-        /// Button6 control.
+        /// btnCourseTimeUpdateSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button Button6;
+        protected global::Ext.Net.Button btnCourseTimeUpdateSave;
         
         /// <summary>
-        /// btnWinCourseTimeUpdate control.
+        /// btnWinCourseTimeUpdateDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btnWinCourseTimeUpdate;
+        protected global::Ext.Net.Button btnWinCourseTimeUpdateDelete;
     }
 }

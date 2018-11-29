@@ -62,11 +62,11 @@ namespace BackEnd
             }
             set
             {
-                hdnCoursetime.SetValue(value.Id);
+                //hdnCoursetime.SetValue(value.Id);
                 txtStart.SetValue(value.StartTime);
                 txtEnd.SetValue(value.EndTime);
                 txtDuration.SetValue(value.Duration);
-                hdnCourseRef.SetValue(value.CourseRef);
+                //hdnCourseRef.SetValue(value.CourseRef);
             }
         }
 
@@ -93,7 +93,7 @@ namespace BackEnd
                 studentID.SetValue(value.Id);
                 txtStudentName.SetValue(value.StudentNameSurname);
                 txtStudentNumber.SetValue(value.StudentNumber);
-               // hdnCourseRef.SetValue(value.CourseRef);
+                //hdnCourseRef.SetValue(value.CourseRef);
 
             }
         }
@@ -111,7 +111,7 @@ namespace BackEnd
         {
             string commanName = e.ExtraParams["command"];
             int Id = Convert.ToInt32(e.ExtraParams["Id"]);
-            hdnStudent.SetValue(Id);
+            //hdnStudent.SetValue(Id);
             switch (commanName)
             {
                 case "Update":
@@ -140,6 +140,10 @@ namespace BackEnd
 
 
 
+
+
+
+
         private void update(int Id)
         {
             Course = new Course() { Id = Id }.get();
@@ -157,6 +161,7 @@ namespace BackEnd
             Store str = gridPanelCourseTime.GetStore();
             str.DataSource = courseTimes;
             str.DataBind();
+            hdnUpdateCourseTime.SetValue(Id);
             winCourseTime.Show();
         }
 
@@ -213,18 +218,28 @@ namespace BackEnd
 
             hdnCourseRef.SetValue(Id);
             winStudentList.Show();
+
         }
 
         public void rollBack(int Id)
         {
             Course = new Course() { Id = Id }.get();
+            //List<CourseTime> courseTimes = new CourseTime().getRollBackList(Course);
+            Store str = grdStudentList.GetStore();
+            //str.DataSource = courseTimes;
+            str.DataBind();
+
+            hdnCourseRef.SetValue(Id);
             winRollBack.Show();
         }
 
         public void updateCourseTime(int Id)
         {
             //CourseTime course = new CourseTime() { Id = Id }.get();
-            CourseTime = new CourseTime() { Id = Id }.get();
+
+
+            CourseTime = new CourseTime();
+            //CourseTime.Update();
             winUpdateCourseTime.Show();
 
 
@@ -232,6 +247,8 @@ namespace BackEnd
 
         protected void deleteCourseTime(int Id)
         {
+         //   CourseTime course = new CourseTime() { Id = Id }.Delete();
+
             windeleteYesNo.Show();
         }
         protected void btnAddNew_DirectClick(object sender, Ext.Net.DirectEventArgs e)
@@ -372,6 +389,7 @@ namespace BackEnd
 
         protected void btnWinCourseTimeUpdate_DirectClick(object sender, DirectEventArgs e)
         {
+            hdnUpdateCourseTime.SetValue(CourseTime.Id);
             winCourseTimeUpdate.Hide();
         }
 
@@ -394,9 +412,22 @@ namespace BackEnd
 
         }
 
+
+        //Ders bilgilerini değiştirmede yapılan günceleme işlemleri için
         protected void btnUpdateSave_DirectClick(object sender, DirectEventArgs e)
         {
-            CourseTime courseTime = new CourseTime();
+            var control = CourseTime;
+            var courseRef = CourseTime.CourseRef;
+            int returnValue = control.save(courseRef);
+            if (returnValue > 0)
+            {
+                X.Msg.Alert("UYARI", "Güncelleme Yapılmıştır").Show();
+                CourseTime = new CourseTime();
+            }
+            else
+            {
+                X.Msg.Alert("UYARI", "Güncelleme yapılamadı.Lütfen tekrar deneyiniz.").Show();
+            }
 
         }
 
@@ -417,9 +448,13 @@ namespace BackEnd
             windeleteYesNo.Hide();
         }
 
+
+        //ders saati silme
         protected void btnDeleteYes_DirectClick(object sender, DirectEventArgs e)
         {
-
+            CourseTime courseTime =  new CourseTime();
+            courseTime.Delete();
+            winSilindi.Show();
         }
 
         protected void datafieldTime1_DirectSelect(object sender, DirectEventArgs e)
@@ -439,6 +474,21 @@ namespace BackEnd
             var time = endTime.Subtract(starTime).TotalMinutes;
             txtDurationTime.SetValue(time);
 
+        }
+
+        protected void btnCourseTimeUpdateSave_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnWinCourseTimeUpdateDelete_DirectClick(object sender, DirectEventArgs e)
+        {
+
+        }
+
+        protected void btnSilindiKapat_DirectClick(object sender, DirectEventArgs e)
+        {
+            winCourseTime.Show();
         }
     }
 }
