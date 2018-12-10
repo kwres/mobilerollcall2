@@ -96,18 +96,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\DAL.cs" />
-    <Compile Include="Migrations\001.cs" />
-    <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\CourseStudent.cs" />
-    <Compile Include="Models\CourseTime.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

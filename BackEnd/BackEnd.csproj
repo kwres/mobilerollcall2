@@ -104,29 +104,13 @@
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <None Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CourseList.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Ext.NET.Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="UserList.aspx" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseList.aspx.cs">
-      <DependentUpon>CourseList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CourseList.aspx.designer.cs">
-      <DependentUpon>CourseList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -138,13 +122,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserList.aspx.cs">
-      <DependentUpon>UserList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserList.aspx.designer.cs">
-      <DependentUpon>UserList.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
