@@ -10,7 +10,7 @@
 namespace BackEnd {
     
     
-    public partial class Defaults {
+    public partial class Default {
         
         /// <summary>
         /// form1 control.
